@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Raelix: software development, automation and project rescue</title>
-<meta name="description" content="Raelix builds MVPs, business systems, websites and automations, and takes over stalled or outdated projects. Domain, database, backend, apps and support from one team.">
+<meta name="description" content="Raelix builds websites, apps, backends, automations and Shopify stores, and takes over stalled projects. Domain, database, hosting and support from one team.">
 <link rel="canonical" href="https://raelix.in/">
-<meta name="theme-color" content="#0E1B2B">
+<meta name="theme-color" content="#0B1626">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Raelix">
 <meta property="og:title" content="Raelix: software built, rescued and run by one team">
-<meta property="og:description" content="MVPs, business systems, websites and automation, plus takeover of stalled projects. Everything from domain and database to apps and support.">
+<meta property="og:description" content="Websites, apps, backends, automation and Shopify, plus takeover of stalled projects. Everything from domain and database to launch and support.">
 <meta property="og:url" content="https://raelix.in/">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -30,21 +30,37 @@
 </script>
 </head>
 <body id="top">
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/></symbol>
+    <symbol id="i-server" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6.5" rx="1.8"/><rect x="3" y="13.5" width="18" height="6.5" rx="1.8"/><path d="M7 7.25h.01M7 16.75h.01"/></symbol>
+    <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6"/><path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2.5 4.5 14H11l-1 7.5L19.5 10H13z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.8 12.2l2.2 2.2 4.2-4.4"/></symbol>
+    <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5.5 7.5h13l1 12.5h-15z"/><path d="M9 7.5a3 3 0 0 1 6 0"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18.5a4.2 4.2 0 0 1-.6-8.3A6 6 0 0 1 18 10a4.2 4.2 0 0 1-.5 8.5z"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20.5 12a8.5 8.5 0 1 1-2.6-6.1"/><path d="M20.5 4v4.8h-4.8"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></symbol>
+  </defs>
+</svg>
+
 <a class="skip-link" href="#main">Skip to content</a>
 
 <header class="site-header">
   <div class="wrap bar">
-    <a class="wordmark" href="#top" aria-label="Raelix home">Raelix</a>
+    <a class="wordmark" href="#top" aria-label="Raelix home"><span class="mark" aria-hidden="true"></span>Raelix</a>
     <nav class="nav" aria-label="Main">
       <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#process">How we work</a></li>
+        <li><a href="#rescue">Project rescue</a></li>
         <li><a href="#who">Who we help</a></li>
-        <li><a href="#build">What we build</a></li>
-        <li><a href="#takeover">Project rescue</a></li>
-        <li><a href="#process">How it works</a></li>
         <li><a href="#faq">FAQ</a></li>
       </ul>
     </nav>
-    <a class="btn btn-primary btn-small" href="#contact">Send an enquiry</a>
+    <a class="btn btn-primary btn-small" href="#contact">Start an enquiry</a>
   </div>
 </header>
 
@@ -53,36 +69,197 @@
   <section class="hero" aria-labelledby="hero-title">
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <h1 id="hero-title">We build, rescue and run the software your business depends on.</h1>
-        <p class="lead">Raelix takes on the whole job for startups and business owners: domain, database, backend, apps, automation, email and OTP. One team, one point of contact.</p>
+        <p class="pill"><span class="dot" aria-hidden="true"></span>Software development, automation and project rescue</p>
+        <h1 id="hero-title">One team for everything your software needs.</h1>
+        <p class="lead">We build websites, apps and automations from scratch, and take over projects that other developers left unfinished. Domain, database, backend, frontend, hosting and support, all handled by us.</p>
         <div class="actions">
           <a class="btn btn-primary" href="#contact">Start an enquiry</a>
-          <a class="btn btn-quiet" href="#build">See what we build</a>
+          <a class="btn btn-quiet" href="#services">See all services</a>
         </div>
+        <ul class="chips" aria-label="What we build">
+          <li>Websites</li><li>Web and mobile apps</li><li>Backend and APIs</li><li>Automation and AI</li><li>Shopify stores</li><li>OTP and email</li><li>Cloud and DevOps</li><li>Project rescue</li>
+        </ul>
       </div>
 
-      <aside class="ledger" aria-labelledby="ledger-title">
-        <h2 id="ledger-title">Everything under one owner</h2>
-        <p class="ledger-sub">What we take care of on every project</p>
-        <ul class="ledger-list">
-          <li style="--i:0"><svg class="tick" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M5.5 10.4l3 3 6-6.6"/></svg><div><strong>Domain, DNS and inboxes</strong><span>Registration, records, business email</span></div></li>
-          <li style="--i:1"><svg class="tick" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M5.5 10.4l3 3 6-6.6"/></svg><div><strong>Hosting and deployment</strong><span>Cloud setup, SSL, CI/CD, backups</span></div></li>
-          <li style="--i:2"><svg class="tick" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M5.5 10.4l3 3 6-6.6"/></svg><div><strong>Database</strong><span>Design, migrations, access and security</span></div></li>
-          <li style="--i:3"><svg class="tick" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M5.5 10.4l3 3 6-6.6"/></svg><div><strong>Backend and APIs</strong><span>Business logic, integrations, payments</span></div></li>
-          <li style="--i:4"><svg class="tick" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M5.5 10.4l3 3 6-6.6"/></svg><div><strong>Web and mobile apps</strong><span>Customer apps, admin panels, dashboards</span></div></li>
-          <li style="--i:5"><svg class="tick" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M5.5 10.4l3 3 6-6.6"/></svg><div><strong>Automation and AI</strong><span>Workflows, assistants, reports, alerts</span></div></li>
-          <li style="--i:6"><svg class="tick" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M5.5 10.4l3 3 6-6.6"/></svg><div><strong>OTP, email and SMS</strong><span>Sign-in, verification, transactional messages</span></div></li>
-          <li style="--i:7"><svg class="tick" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M5.5 10.4l3 3 6-6.6"/></svg><div><strong>Shopify and online stores</strong><span>Setup, themes, custom features, checkout</span></div></li>
-          <li style="--i:8"><svg class="tick" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9"/><path d="M5.5 10.4l3 3 6-6.6"/></svg><div><strong>Monitoring and support</strong><span>Fixes, upgrades, keeping it running</span></div></li>
-        </ul>
-        <p class="ledger-foot">Set up under your own accounts, so you keep ownership.</p>
+      <aside class="flow" aria-labelledby="flow-title">
+        <div class="flow-head">
+          <h2 id="flow-title">From idea to live product</h2>
+          <span class="live"><span class="dot" aria-hidden="true"></span>One pipeline, one team</span>
+        </div>
+        <ol class="flow-list">
+          <li style="--i:0">
+            <span class="node" aria-hidden="true"></span>
+            <div><strong>Discover</strong><span>Requirements, scope, timeline and a written quote</span></div>
+          </li>
+          <li style="--i:1">
+            <span class="node" aria-hidden="true"></span>
+            <div><strong>Design</strong><span>Screens, system architecture and database design</span></div>
+          </li>
+          <li style="--i:2">
+            <span class="node" aria-hidden="true"></span>
+            <div><strong>Build</strong><span>Frontend, backend, APIs, automation and integrations</span></div>
+          </li>
+          <li style="--i:3">
+            <span class="node" aria-hidden="true"></span>
+            <div><strong>Launch</strong><span>Domain, hosting, sign-in, OTP and email, go live</span></div>
+          </li>
+          <li style="--i:4">
+            <span class="node" aria-hidden="true"></span>
+            <div><strong>Run</strong><span>Monitoring, fixes, upgrades and new features</span></div>
+          </li>
+        </ol>
+        <p class="flow-foot">Everything is set up under your own accounts, so you keep ownership.</p>
       </aside>
+    </div>
+  </section>
+
+  <section class="section" id="services" aria-labelledby="services-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title" id="services-title">Every service, under one roof</h2>
+        <p class="section-sub">Pick one, or hand us the whole job. Either way you deal with a single team instead of five vendors.</p>
+      </div>
+
+      <ul class="svc-grid">
+        <li class="svc">
+          <span class="ico"><svg aria-hidden="true"><use href="#i-globe"/></svg></span>
+          <h3>Websites and landing pages</h3>
+          <p>Company sites, product pages and portals that load fast, rank well and are easy for you to update.</p>
+          <span class="tags">Design, build, SEO basics, CMS</span>
+        </li>
+        <li class="svc">
+          <span class="ico"><svg aria-hidden="true"><use href="#i-phone"/></svg></span>
+          <h3>Web and mobile apps</h3>
+          <p>MVPs, customer apps, admin panels and dashboards for startups and growing businesses.</p>
+          <span class="tags">React, Next.js, iOS and Android</span>
+        </li>
+        <li class="svc">
+          <span class="ico"><svg aria-hidden="true"><use href="#i-server"/></svg></span>
+          <h3>Backend and APIs</h3>
+          <p>The engine behind your product: business logic, integrations, payments and third-party connections.</p>
+          <span class="tags">Java, Spring Boot, REST, microservices</span>
+        </li>
+        <li class="svc">
+          <span class="ico"><svg aria-hidden="true"><use href="#i-db"/></svg></span>
+          <h3>Database and data</h3>
+          <p>Schema design, migrations, backups, access control and reporting, set up so it scales with you.</p>
+          <span class="tags">SQL databases, Kafka, analytics</span>
+        </li>
+        <li class="svc">
+          <span class="ico"><svg aria-hidden="true"><use href="#i-bolt"/></svg></span>
+          <h3>Automation and AI</h3>
+          <p>Remove manual work: workflows between your tools, lead handling, reports, alerts and AI assistants.</p>
+          <span class="tags">n8n, LLM integrations, chat and voice</span>
+        </li>
+        <li class="svc">
+          <span class="ico"><svg aria-hidden="true"><use href="#i-shield"/></svg></span>
+          <h3>Sign-in, OTP and email</h3>
+          <p>Secure login, verification codes, transactional email and SMS that actually reach your users.</p>
+          <span class="tags">Auth, OTP, SMTP, SMS gateways</span>
+        </li>
+        <li class="svc">
+          <span class="ico"><svg aria-hidden="true"><use href="#i-bag"/></svg></span>
+          <h3>Shopify and online stores</h3>
+          <p>Store setup, themes, custom features and checkout, so you can start selling without the tech headache.</p>
+          <span class="tags">Shopify, payments, shipping</span>
+        </li>
+        <li class="svc">
+          <span class="ico"><svg aria-hidden="true"><use href="#i-cloud"/></svg></span>
+          <h3>Cloud, domains and DevOps</h3>
+          <p>Domain and DNS, hosting, SSL, deployments, monitoring and backups, all taken care of.</p>
+          <span class="tags">AWS, Google Cloud, CI/CD, Kubernetes</span>
+        </li>
+        <li class="svc svc-feature">
+          <span class="ico"><svg aria-hidden="true"><use href="#i-refresh"/></svg></span>
+          <h3>Project rescue and upgrades</h3>
+          <p>Inherited a stalled or outdated project? We review it, fix it and bring it up to standard.</p>
+          <a class="svc-link" href="#rescue">See how rescue works</a>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-tint" id="process" aria-labelledby="process-title">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="section-title" id="process-title">How a project runs, stage by stage</h2>
+        <p class="section-sub">A clear pipeline with something concrete delivered at every stage, so you always know where things stand.</p>
+      </div>
+
+      <ol class="stages">
+        <li class="stage">
+          <span class="stage-num">1</span>
+          <h3>Discover</h3>
+          <p>A short call to understand the problem, your users and your budget.</p>
+          <p class="delivers"><strong>You get:</strong> written scope, timeline and quote</p>
+        </li>
+        <li class="stage">
+          <span class="stage-num">2</span>
+          <h3>Design</h3>
+          <p>We plan the screens, the system and the database before writing code.</p>
+          <p class="delivers"><strong>You get:</strong> designs and an architecture plan</p>
+        </li>
+        <li class="stage">
+          <span class="stage-num">3</span>
+          <h3>Build</h3>
+          <p>Work in milestones, with working versions you can click through and test.</p>
+          <p class="delivers"><strong>You get:</strong> a testable build every milestone</p>
+        </li>
+        <li class="stage">
+          <span class="stage-num">4</span>
+          <h3>Launch</h3>
+          <p>Domain, hosting, email, OTP and monitoring set up, then we go live.</p>
+          <p class="delivers"><strong>You get:</strong> a live product on your accounts</p>
+        </li>
+        <li class="stage">
+          <span class="stage-num">5</span>
+          <h3>Run</h3>
+          <p>Optional monthly support for fixes, hosting, updates and new features.</p>
+          <p class="delivers"><strong>You get:</strong> a team on call as you grow</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="rescue" id="rescue" aria-labelledby="rescue-title">
+    <div class="wrap">
+      <div class="rescue-head">
+        <h2 id="rescue-title">Inherited a project that stopped halfway?</h2>
+        <p>Developers disappear and agencies move on, leaving code with no documentation. We take over from wherever it stands, and tell you honestly whether to fix it, upgrade it or rebuild it before you commit to anything.</p>
+      </div>
+
+      <ol class="stages stages-dark">
+        <li class="stage">
+          <span class="stage-num">1</span>
+          <h3>Review</h3>
+          <p>We go through the code, servers, databases and access, and tell you plainly what condition it is in.</p>
+        </li>
+        <li class="stage">
+          <span class="stage-num">2</span>
+          <h3>Stabilise</h3>
+          <p>We secure the accounts, set up backups and fix whatever is breaking right now.</p>
+        </li>
+        <li class="stage">
+          <span class="stage-num">3</span>
+          <h3>Upgrade</h3>
+          <p>We finish missing features and modernise what is slow, outdated or hard to change.</p>
+        </li>
+        <li class="stage">
+          <span class="stage-num">4</span>
+          <h3>Hand over</h3>
+          <p>You receive documentation and full ownership of the code, hosting and data.</p>
+        </li>
+      </ol>
+
+      <a class="btn btn-light" href="#contact">Tell us about your project</a>
     </div>
   </section>
 
   <section class="section" id="who" aria-labelledby="who-title">
     <div class="wrap">
-      <h2 class="section-title" id="who-title">Who we help</h2>
+      <div class="section-head">
+        <h2 class="section-title" id="who-title">Who we work with</h2>
+      </div>
       <div class="audience">
         <article class="audience-row">
           <h3>Startups building a first product</h3>
@@ -100,80 +277,6 @@
           <p class="gets">You get a written review, fixes for what is breaking, and a plan to upgrade or finish the rest.</p>
         </article>
       </div>
-    </div>
-  </section>
-
-  <section class="section section-tint" id="build" aria-labelledby="build-title">
-    <div class="wrap">
-      <h2 class="section-title" id="build-title">What we build</h2>
-      <dl class="service-list">
-        <div class="service">
-          <dt>Products and MVPs</dt>
-          <dd>Web and mobile apps for new ventures, scoped to your budget and timeline.</dd>
-        </div>
-        <div class="service">
-          <dt>Business systems</dt>
-          <dd>Portals, dashboards, CRMs, booking and inventory tools, built around how you actually work.</dd>
-        </div>
-        <div class="service">
-          <dt>Websites and Shopify stores</dt>
-          <dd>Company sites, landing pages and online stores that load fast and are easy to update.</dd>
-        </div>
-        <div class="service">
-          <dt>Automation and AI</dt>
-          <dd>Workflows between your tools, chat and voice assistants, lead handling, reports and alerts.</dd>
-        </div>
-        <div class="service">
-          <dt>Sign-in, email, OTP and payments</dt>
-          <dd>Authentication, verification codes, transactional email and SMS, payment gateways.</dd>
-        </div>
-        <div class="service">
-          <dt>Cloud, domains and DevOps</dt>
-          <dd>Domain and DNS, hosting, databases, deployments, monitoring and backups.</dd>
-        </div>
-      </dl>
-    </div>
-  </section>
-
-  <section class="rescue" id="takeover" aria-labelledby="takeover-title">
-    <div class="wrap rescue-grid">
-      <div class="rescue-intro">
-        <h2 id="takeover-title">Inherited a project that stopped halfway?</h2>
-        <p>Developers disappear, agencies move on, and the code is left with no documentation. We take over from wherever it stands.</p>
-        <p>Not sure whether to fix it or rebuild it? You get an honest recommendation after the review, before you commit to anything.</p>
-        <a class="btn btn-light" href="#contact">Tell us about your project</a>
-      </div>
-      <ol class="rescue-steps">
-        <li>
-          <span class="step-num">1</span>
-          <div><h3>Review</h3><p>We go through the code, servers, databases and access, and tell you plainly what condition it is in.</p></div>
-        </li>
-        <li>
-          <span class="step-num">2</span>
-          <div><h3>Stabilise</h3><p>We secure accounts, set up backups and fix whatever is breaking right now.</p></div>
-        </li>
-        <li>
-          <span class="step-num">3</span>
-          <div><h3>Upgrade</h3><p>We finish missing features and modernise what is slow, outdated or hard to change.</p></div>
-        </li>
-        <li>
-          <span class="step-num">4</span>
-          <div><h3>Hand over</h3><p>You receive documentation and full ownership of the code, hosting and data.</p></div>
-        </li>
-      </ol>
-    </div>
-  </section>
-
-  <section class="section" id="process" aria-labelledby="process-title">
-    <div class="wrap">
-      <h2 class="section-title" id="process-title">How a project runs</h2>
-      <ol class="steps">
-        <li><span class="step-count">1</span><h3>Talk</h3><p>A short call or email exchange to understand the problem and your budget.</p></li>
-        <li><span class="step-count">2</span><h3>Scope</h3><p>A written scope, timeline and quote before any work starts.</p></li>
-        <li><span class="step-count">3</span><h3>Build</h3><p>Work in milestones, with working versions you can see and test along the way.</p></li>
-        <li><span class="step-count">4</span><h3>Launch</h3><p>We deploy it, set up the accounts in your name and hand over documentation.</p></li>
-        <li><span class="step-count">5</span><h3>Support</h3><p>An optional monthly plan for fixes, hosting, updates and new features.</p></li>
-      </ol>
 
       <dl class="stack">
         <div><dt>Backend and data</dt><dd>Java, Spring Boot, REST APIs, microservices, Kafka, SQL databases</dd></div>
@@ -216,6 +319,11 @@
       <div class="contact-intro">
         <h2 class="section-title" id="contact-title">Tell us what you need built or fixed</h2>
         <p>Share a few details and we will reply by email with next steps. You can also write to us directly at <a class="text-link" href="mailto:hello@raelix.in">hello@raelix.in</a>.</p>
+        <ul class="ticks">
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Reply by email with next steps</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Written scope and quote before any work</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>No obligation</li>
+        </ul>
       </div>
 
       <form class="form" id="enquiry-form" novalidate>
@@ -286,7 +394,7 @@
 
 <footer class="site-footer">
   <div class="wrap foot">
-    <span class="wordmark wordmark-small">Raelix</span>
+    <span class="wordmark wordmark-small"><span class="mark" aria-hidden="true"></span>Raelix</span>
     <a class="text-link" href="mailto:hello@raelix.in">hello@raelix.in</a>
     <span class="copy">© 2026 Raelix</span>
   </div>
