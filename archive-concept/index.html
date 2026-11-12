@@ -3,143 +3,250 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Slice the tardigrade: a concept for the Edible Climate Archive</title>
-<meta name="description" content="A small interactive concept sketch: a tardigrade cake you slice layer by layer, each layer a flavour and a piece of science.">
+<title>Try to break a tardigrade: a concept for the Edible Climate Archive</title>
+<meta name="description" content="A playable concept sketch: send a tardigrade through five extreme worlds, wake it up, and collect the five layers of a cake.">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#E7F0F7">
+<meta name="theme-color" content="#2F5D3A">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,500..800,100&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{
-  --ice:#E7F0F7; --ice-deep:#CFE1EE; --ink:#16304A; --ink-soft:#4A6278;
-  --peach:#EDBB9C; --peach-deep:#D99B78; --moss:#8FA24A; --cream:#FFF8EE;
-  --rule:#BFD3E2;
-}
+:root{--ink:#16304A;--ink-soft:#4A6278;--cream:#FFF8EE;--rule:#E9DCC8}
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth}
-body{background:var(--ice);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1160px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
-.note{padding:14px 0;font-size:.9rem;color:var(--ink-soft);border-bottom:1px solid var(--rule)}
-.note b{color:var(--ink);font-weight:600}
+body{background:var(--cream);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.serif{font-family:Fraunces,Georgia,serif;font-variation-settings:"SOFT" 100}
+.wrap{max-width:1180px;margin:0 auto;padding:0 clamp(18px,4vw,48px)}
 
-.hero{padding-top:clamp(36px,6vw,72px);padding-bottom:clamp(40px,6vw,80px)}
-h1{font-family:Fraunces,Georgia,serif;font-weight:700;font-variation-settings:"SOFT" 100,"opsz" 144;font-size:clamp(2.6rem,6.4vw,5rem);line-height:1;letter-spacing:-.02em;max-width:12em}
-.lede{margin-top:18px;font-size:clamp(1.05rem,1.8vw,1.3rem);color:var(--ink-soft);max-width:34em}
+/* lab */
+.lab{position:relative;overflow:hidden;color:#fff;min-height:100svh}
+.bg{position:absolute;inset:0;opacity:0;transition:opacity .9s ease}
+.bg.on{opacity:1}
+.bg[data-w="0"]{background:radial-gradient(120% 80% at 50% 100%,#6FA05A 0,#3C7040 45%,#244A33 100%)}
+.bg[data-w="1"]{background:radial-gradient(120% 80% at 50% 100%,#E0A04C 0,#B06F2C 50%,#7A4519 100%)}
+.bg[data-w="2"]{background:linear-gradient(180deg,#1F4F82 0,#4D8FC4 55%,#B8E0F5 100%)}
+.bg[data-w="3"]{background:radial-gradient(120% 90% at 50% 100%,#F28A3B 0,#C7391F 45%,#5E1210 100%)}
+.bg[data-w="4"]{background:radial-gradient(100% 80% at 70% 30%,#2B2166 0,#120F36 55%,#070818 100%)}
+#fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.lab-in{position:relative;z-index:2;padding-top:20px;padding-bottom:36px}
+.note{font-size:.86rem;opacity:.9;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.28)}
+.note b{font-weight:600}
+h1{margin-top:clamp(22px,4vw,44px);font-weight:800;font-size:clamp(2.5rem,6.6vw,5.4rem);line-height:.98;letter-spacing:-.025em;max-width:11em;text-shadow:0 3px 24px rgba(0,0,0,.28)}
+.lede{margin-top:14px;font-size:clamp(1.02rem,1.7vw,1.25rem);max-width:30em;text-shadow:0 2px 14px rgba(0,0,0,.3)}
 
-.stage{margin-top:clamp(28px,5vw,56px);display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(20px,4vw,56px);align-items:center}
-.cake{position:relative}
-.cake svg{width:100%;height:auto;display:block;overflow:visible}
-.bob{animation:bob 7s ease-in-out infinite;transform-origin:50% 60%}
-@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-.band{cursor:pointer;transition:transform .45s cubic-bezier(.3,1.4,.5,1)}
-.band:hover{transform:translateX(10px)}
-.band.on{transform:translateX(34px)}
-.band:focus{outline:none}
-.band:focus-visible .edge{stroke:var(--ink);stroke-width:4}
-.edge{fill:none;stroke:transparent;stroke-width:0}
-.band.on .edge{stroke:var(--ink);stroke-width:3}
-.hint{margin-top:6px;text-align:center;color:var(--ink-soft);font-size:.95rem}
+.stage{margin-top:clamp(0px,1vw,12px);display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(18px,3.5vw,48px);align-items:center}
+.creature{position:relative;display:flex;flex-direction:column;align-items:center}
+#td{width:min(560px,100%);height:auto;display:block;overflow:visible;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+#td:focus-visible{outline:3px solid #fff;outline-offset:6px;border-radius:24px}
+#shadow{fill:rgba(0,0,0,.22);transition:opacity .6s,transform .6s;transform-origin:50% 50%;transform-box:fill-box}
+.floaty #shadow{opacity:0}
 
-.panel{background:var(--cream);border:1px solid var(--rule);border-radius:28px;padding:clamp(24px,3.4vw,40px);min-height:360px;box-shadow:0 30px 60px -40px rgba(22,48,74,.45)}
-.panel h2{font-family:Fraunces,Georgia,serif;font-weight:700;font-variation-settings:"SOFT" 100;font-size:clamp(1.8rem,3.2vw,2.5rem);line-height:1.1;letter-spacing:-.01em}
-.swatch{display:inline-block;width:14px;height:14px;border-radius:50%;margin-right:10px;vertical-align:baseline}
-.flavour{margin-top:14px;font-weight:600}
-.flavour small{display:block;font-weight:400;color:var(--ink-soft);font-size:.85rem}
-.science{margin-top:16px;font-size:1.05rem}
-.panel-nav{margin-top:26px;display:flex;gap:10px;flex-wrap:wrap}
-button.btn{font:600 1rem Inter,sans-serif;border:0;border-radius:999px;padding:13px 24px;cursor:pointer;background:var(--ink);color:#fff}
-button.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
-button.btn:focus-visible,a:focus-visible{outline:3px solid #1D4ED8;outline-offset:3px}
-.empty p{margin-top:12px;font-size:1.1rem;color:var(--ink-soft)}
-.fade{animation:fade .35s ease}
+/* creature states */
+#creature{transform-box:fill-box;transform-origin:50% 80%}
+.s-happy #creature{animation:bob 3.2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.floaty #creature{animation:drift 7s ease-in-out infinite}
+@keyframes drift{0%{transform:translate(-14px,-6px) rotate(-6deg)}50%{transform:translate(14px,-30px) rotate(7deg)}100%{transform:translate(-14px,-6px) rotate(-6deg)}}
+.shiver #tun-wrap{animation:shiver .18s linear infinite}
+@keyframes shiver{0%,100%{transform:translateX(-2px)}50%{transform:translateX(2px)}}
+#t-normal,#t-tun{transition:opacity .45s ease,transform .6s cubic-bezier(.3,1.5,.5,1);transform-box:fill-box;transform-origin:50% 85%}
+.s-tun #t-normal{opacity:0;transform:scale(.45)}
+#t-tun{opacity:0;transform:scale(.45)}
+.s-tun #t-tun{opacity:1;transform:none;transition-delay:.2s}
+.s-happy #t-tun{opacity:0;transform:scale(.45)}
+.leg{transform-box:fill-box;transform-origin:50% 0;animation:step 1.1s ease-in-out infinite;animation-delay:var(--d)}
+@keyframes step{0%,100%{transform:rotate(7deg)}50%{transform:rotate(-7deg)}}
+.s-tun .leg{animation:none}
+#decor>g{opacity:0;transition:opacity .6s ease .4s}
+.d-ice #d-ice,.d-steam #d-steam,.d-bubble #d-bubble,.d-crack #d-crack{opacity:1}
+.blink{transform-box:fill-box;transform-origin:50% 50%;animation:blink 5s infinite}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+.zz{opacity:0;font:700 26px Fraunces,Georgia,serif;fill:#fff}
+.s-tun .zz{animation:zz 2.4s ease-in-out infinite;animation-delay:var(--d)}
+@keyframes zz{0%{opacity:0;transform:translate(0,0)}30%{opacity:.95}100%{opacity:0;transform:translate(26px,-46px)}}
+.steam{fill:none;stroke:rgba(255,255,255,.65);stroke-width:5;stroke-linecap:round;animation:steam 2s ease-in-out infinite;animation-delay:var(--d)}
+@keyframes steam{0%{transform:translateY(8px);opacity:0}40%{opacity:.9}100%{transform:translateY(-26px);opacity:0}}
+.wake #creature{animation:wake .9s cubic-bezier(.3,1.6,.5,1)}
+@keyframes wake{0%{transform:scale(.7,.7)}35%{transform:scale(1.14,.88) translateY(8px)}60%{transform:scale(.94,1.1) translateY(-30px)}100%{transform:none}}
+.boop #creature{animation:boop .55s cubic-bezier(.3,1.7,.5,1)}
+@keyframes boop{0%{transform:none}30%{transform:scale(1.12,.84) translateY(10px)}65%{transform:scale(.95,1.08) translateY(-12px)}100%{transform:none}}
+.heart{position:absolute;pointer-events:none;color:#FFB3C0;font-size:28px;animation:heart 1.4s ease-out forwards;text-shadow:0 2px 8px rgba(0,0,0,.25)}
+@keyframes heart{0%{opacity:0;transform:translateY(0) scale(.5)}20%{opacity:1}100%{opacity:0;transform:translateY(-120px) scale(1.2)}}
+.say{margin-top:6px;min-height:1.6em;font-weight:600;text-align:center;text-shadow:0 2px 12px rgba(0,0,0,.35)}
+
+/* world picker */
+.worlds{margin-top:6px;display:flex;gap:clamp(8px,1.6vw,16px);justify-content:center;flex-wrap:wrap}
+.wbtn{width:clamp(62px,9vw,82px);display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:0;color:#fff;font:600 .78rem Inter,sans-serif;cursor:pointer;text-shadow:0 1px 8px rgba(0,0,0,.4)}
+.wbtn .dot{width:clamp(50px,7vw,62px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.45);backdrop-filter:blur(4px);transition:transform .25s cubic-bezier(.3,1.6,.5,1),background .25s,border-color .25s;position:relative}
+.wbtn:hover .dot{transform:translateY(-4px)}
+.wbtn[aria-pressed="true"] .dot{background:#fff;color:var(--ink);border-color:#fff;transform:scale(1.1)}
+.wbtn svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.wbtn .got{position:absolute;right:-4px;top:-4px;width:20px;height:20px;border-radius:50%;background:#3DDC97;color:#0B1626;display:none;place-items:center;font-size:12px;font-weight:800}
+.wbtn.done .got{display:grid}
+.wbtn:focus-visible .dot{outline:3px solid #fff;outline-offset:3px}
+
+/* panel */
+.side{display:grid;gap:16px}
+.panel{background:var(--cream);color:var(--ink);border-radius:28px;padding:clamp(22px,3vw,36px);box-shadow:0 28px 60px -28px rgba(0,0,0,.55)}
+.panel h2{font-weight:700;font-size:clamp(1.7rem,3vw,2.3rem);line-height:1.1;letter-spacing:-.01em}
+.sw{display:inline-block;width:14px;height:14px;border-radius:50%;margin-right:10px}
+.status{margin-top:10px;font-weight:600;color:#9A5B2B}
+.science{margin-top:12px;font-size:1.04rem}
+.flavour{margin-top:14px;padding-top:14px;border-top:1px dashed #D9C8AE;font-weight:600}
+.flavour small{display:block;font-weight:400;color:var(--ink-soft);font-size:.84rem}
+.cta{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}
+.btn{font:600 1.02rem Inter,sans-serif;border:0;border-radius:999px;padding:14px 26px;cursor:pointer;background:var(--ink);color:#fff;text-decoration:none;display:inline-block;transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.btn:focus-visible,a:focus-visible{outline:3px solid #1D4ED8;outline-offset:3px}
+.fade{animation:fade .4s ease}
 @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 
-.build{border-top:1px solid var(--rule);padding:clamp(48px,7vw,88px) 0}
-.build h2{font-family:Fraunces,Georgia,serif;font-weight:700;font-variation-settings:"SOFT" 100;font-size:clamp(1.9rem,3.8vw,3rem);line-height:1.08;letter-spacing:-.015em;max-width:16em}
-.cols{margin-top:34px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,4vw,52px)}
+.cakecard{background:rgba(255,248,238,.14);border:1px solid rgba(255,255,255,.35);border-radius:24px;padding:16px 20px;backdrop-filter:blur(6px);display:flex;align-items:center;gap:18px}
+.cakecard svg{width:120px;flex:none;overflow:visible}
+.cakecard p{font-weight:600;text-shadow:0 1px 8px rgba(0,0,0,.3)}
+.cakecard small{display:block;font-weight:400;opacity:.92}
+.tier{transition:none}
+.tier.got{animation:drop .6s cubic-bezier(.3,1.5,.5,1)}
+@keyframes drop{0%{transform:translateY(-60px);opacity:0}100%{transform:none;opacity:1}}
+
+/* build strip */
+.build{padding:clamp(48px,7vw,88px) 0;background:var(--cream)}
+.build h2{font-weight:700;font-size:clamp(1.9rem,3.8vw,3rem);line-height:1.08;letter-spacing:-.015em;max-width:16em}
+.cols{margin-top:32px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(22px,4vw,52px)}
 .cols div{border-top:3px solid var(--ink);padding-top:16px}
 .cols h3{font-size:1.12rem;font-weight:600}
 .cols p{margin-top:8px;color:var(--ink-soft)}
-.sign{margin-top:48px;display:flex;flex-wrap:wrap;gap:18px 32px;align-items:center;justify-content:space-between}
-.sign p{max-width:32em;color:var(--ink-soft);font-size:.95rem}
-.sign a.btn{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;font-weight:600;border-radius:999px;padding:14px 28px}
-footer{padding:26px 0 40px;border-top:1px solid var(--rule);font-size:.88rem;color:var(--ink-soft)}
+.sign{margin-top:44px;display:flex;flex-wrap:wrap;gap:18px 32px;align-items:center;justify-content:space-between}
+.sign p{max-width:34em;color:var(--ink-soft);font-size:.95rem}
+footer{padding:22px 0 38px;border-top:1px solid var(--rule);font-size:.88rem;color:var(--ink-soft)}
 
 @media (max-width:860px){
   .stage{grid-template-columns:1fr}
   .cols{grid-template-columns:1fr}
-  .panel{min-height:0}
-  .band.on{transform:translateX(22px)}
+  .lab{min-height:0}
 }
 @media (prefers-reduced-motion:reduce){
-  .bob{animation:none}
-  .band{transition:none}
-  .fade{animation:none}
+  *{animation:none!important;transition-duration:.01s!important}
   html{scroll-behavior:auto}
 }
 </style>
 </head>
 <body>
-<div class="wrap"><p class="note"><b>A concept sketch</b> made for the Edible Climate Archive call. All art is original and the flavours are placeholders.</p></div>
 
-<main>
-<section class="hero wrap">
-  <h1>Slice the tardigrade.</h1>
-  <p class="lede">Every layer is a flavour. Every flavour is a piece of science. This is how a visitor could explore one artwork in the archive.</p>
+<section class="lab" id="lab">
+  <div class="bg on" data-w="0"></div><div class="bg" data-w="1"></div><div class="bg" data-w="2"></div><div class="bg" data-w="3"></div><div class="bg" data-w="4"></div>
+  <canvas id="fx" aria-hidden="true"></canvas>
 
-  <div class="stage">
-    <div class="cake">
-      <svg viewBox="0 0 680 500" role="group" aria-label="A tardigrade cake made of five layers. Select a layer to read about it.">
-        <defs>
-          <clipPath id="body"><path d="M80 235 C80 125 190 82 312 82 C428 82 520 118 548 196 C566 214 574 238 556 262 C540 300 508 336 462 360 C420 384 360 394 298 394 C180 394 80 360 80 235 Z"/></clipPath>
-        </defs>
-        <g class="bob">
-          <g fill="#8FA24A">
-            <ellipse cx="170" cy="470" rx="64" ry="16"/><ellipse cx="330" cy="474" rx="90" ry="14" fill="#7C9040"/><ellipse cx="500" cy="468" rx="62" ry="16"/>
-            <circle cx="140" cy="458" r="9"/><circle cx="196" cy="454" r="7"/><circle cx="478" cy="452" r="8"/><circle cx="530" cy="456" r="6"/>
-          </g>
-          <g fill="#D99B78">
-            <rect x="196" y="360" width="50" height="96" rx="24"/><rect x="396" y="360" width="50" height="96" rx="24"/>
-          </g>
-          <g fill="#EDBB9C" stroke="#D99B78" stroke-width="3">
-            <rect x="120" y="350" width="56" height="108" rx="27"/><rect x="262" y="360" width="56" height="102" rx="27"/><rect x="340" y="360" width="56" height="102" rx="27"/><rect x="470" y="330" width="52" height="124" rx="26"/>
-          </g>
-          <g stroke="#B9794F" stroke-width="3" stroke-linecap="round" fill="none">
-            <path d="M136 452 l-6 10 M148 456 l0 12 M160 452 l6 10"/>
-            <path d="M278 456 l-6 10 M290 460 l0 12 M302 456 l6 10"/>
-            <path d="M356 456 l-6 10 M368 460 l0 12 M380 456 l6 10"/>
-            <path d="M484 448 l-6 10 M496 452 l0 12 M508 448 l6 10"/>
-          </g>
+  <div class="lab-in wrap">
+    <p class="note"><b>A concept sketch</b> for the Edible Climate Archive call. All art is original and the flavours are placeholders.</p>
+    <h1 class="serif">Try to break a tardigrade.</h1>
+    <p class="lede">You can't. Send it somewhere terrible, wake it up, and collect the five layers of a cake.</p>
 
-          <g id="layers">
-            <g class="band" data-i="0" tabindex="0" role="button" aria-pressed="false" aria-label="Layer 1: Moss crumb"><g clip-path="url(#body)"><rect x="0" y="70" width="680" height="64" fill="#8FA24A"/><rect x="0" y="70" width="680" height="9" fill="#B5C77A"/></g><path class="edge" d="M80 134 L560 134"/></g>
-            <g class="band" data-i="1" tabindex="0" role="button" aria-pressed="false" aria-label="Layer 2: The dry tun"><g clip-path="url(#body)"><rect x="0" y="134" width="680" height="62" fill="#C98A4B"/><rect x="0" y="134" width="680" height="8" fill="#E2AE78"/></g></g>
-            <g class="band" data-i="2" tabindex="0" role="button" aria-pressed="false" aria-label="Layer 3: Deep freeze"><g clip-path="url(#body)"><rect x="0" y="196" width="680" height="62" fill="#9CC3E6"/><rect x="0" y="196" width="680" height="8" fill="#C7E0F3"/></g></g>
-            <g class="band" data-i="3" tabindex="0" role="button" aria-pressed="false" aria-label="Layer 4: Heat"><g clip-path="url(#body)"><rect x="0" y="258" width="680" height="62" fill="#D4553A"/><rect x="0" y="258" width="680" height="8" fill="#EE8B6E"/></g></g>
-            <g class="band" data-i="4" tabindex="0" role="button" aria-pressed="false" aria-label="Layer 5: Open space"><g clip-path="url(#body)"><rect x="0" y="320" width="680" height="80" fill="#3A2848"/><rect x="0" y="320" width="680" height="8" fill="#6A4E82"/></g></g>
-          </g>
+    <div class="worlds" role="group" aria-label="Choose a world" id="worlds" style="margin-top:22px"></div>
 
-          <g>
-            <circle cx="548" cy="238" r="26" fill="#FFF8EE" stroke="#D99B78" stroke-width="4"/>
-            <circle cx="548" cy="238" r="12" fill="#8B4B33"/>
-            <ellipse cx="506" cy="182" rx="15" ry="9" fill="#F4A6A0" opacity=".75"/><circle cx="494" cy="150" r="7" fill="#16304A"/><circle cx="494" cy="147" r="2.4" fill="#fff"/>
+    <div class="stage">
+      <div class="creature" id="creatureBox">
+        <svg id="td" class="s-happy" viewBox="0 0 420 330" role="button" tabindex="0" aria-label="The tardigrade. Tap to boop it.">
+          <defs>
+            <linearGradient id="gb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F8D2B6"/><stop offset="1" stop-color="#E3A584"/></linearGradient>
+            <linearGradient id="gt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E6B493"/><stop offset="1" stop-color="#C98D68"/></linearGradient>
+          </defs>
+          <ellipse id="shadow" cx="210" cy="296" rx="140" ry="13"/>
+          <g id="creature">
+            <g id="t-normal">
+              <!-- back legs -->
+              <g fill="#D49872">
+                <g transform="translate(138,205)"><g class="leg" style="--d:-.2s"><rect x="-17" y="0" width="34" height="72" rx="17"/></g></g>
+                <g transform="translate(196,215)"><g class="leg" style="--d:-.7s"><rect x="-17" y="0" width="34" height="68" rx="17"/></g></g>
+                <g transform="translate(250,215)"><g class="leg" style="--d:-.4s"><rect x="-17" y="0" width="34" height="68" rx="17"/></g></g>
+                <g transform="translate(306,205)"><g class="leg" style="--d:-.9s"><rect x="-17" y="0" width="34" height="72" rx="17"/></g></g>
+              </g>
+              <!-- front legs -->
+              <g fill="#F0BE9F" stroke="#D49872" stroke-width="3">
+                <g transform="translate(108,215)"><g class="leg" style="--d:0s"><rect x="-19" y="0" width="38" height="70" rx="19"/></g></g>
+                <g transform="translate(166,222)"><g class="leg" style="--d:-.55s"><rect x="-19" y="0" width="38" height="66" rx="19"/></g></g>
+                <g transform="translate(272,222)"><g class="leg" style="--d:-.25s"><rect x="-19" y="0" width="38" height="66" rx="19"/></g></g>
+                <g transform="translate(330,212)"><g class="leg" style="--d:-.8s"><rect x="-19" y="0" width="38" height="74" rx="19"/></g></g>
+              </g>
+              <!-- claws -->
+              <g stroke="#9A5B2B" stroke-width="3.4" stroke-linecap="round" fill="none">
+                <path d="M100 282 l-5 9 M108 285 l0 10 M116 282 l5 9"/><path d="M158 284 l-5 9 M166 287 l0 10 M174 284 l5 9"/><path d="M264 284 l-5 9 M272 287 l0 10 M280 284 l5 9"/><path d="M322 280 l-5 9 M330 283 l0 10 M338 280 l5 9"/>
+              </g>
+              <!-- body -->
+              <path d="M62 170 C62 96 126 60 206 60 C268 60 316 76 340 112 C372 118 396 142 396 172 C396 206 366 226 330 232 C300 252 256 258 206 258 C122 258 62 240 62 170 Z" fill="url(#gb)" stroke="#D49872" stroke-width="3"/>
+              <g fill="none" stroke="#D49872" stroke-width="3" stroke-linecap="round" opacity=".7">
+                <path d="M118 74 C100 130 102 200 124 246"/><path d="M176 62 C160 130 162 210 180 256"/><path d="M236 62 C222 130 224 210 238 258"/><path d="M290 70 C280 130 282 200 292 252"/>
+              </g>
+              <ellipse cx="190" cy="88" rx="86" ry="14" fill="#fff" opacity=".28"/>
+              <!-- moss hair -->
+              <g fill="#8FA24A"><circle cx="148" cy="62" r="11"/><circle cx="170" cy="56" r="13"/><circle cx="194" cy="60" r="10"/><circle cx="130" cy="70" r="8"/></g>
+              <!-- face -->
+              <circle cx="388" cy="172" r="26" fill="#FFF8EE" stroke="#D49872" stroke-width="4"/>
+              <circle cx="388" cy="172" r="12" fill="#8B4B33"/>
+              <ellipse cx="346" cy="190" rx="16" ry="10" fill="#F4A6A0" opacity=".8"/>
+              <g class="blink">
+                <circle cx="350" cy="148" r="15" fill="#fff"/><circle cx="318" cy="156" r="12" fill="#fff"/>
+                <circle class="pupil" cx="350" cy="148" r="8" fill="#16304A"/><circle class="pupil" cx="318" cy="156" r="6.5" fill="#16304A"/>
+                <circle cx="347" cy="144" r="2.6" fill="#fff"/><circle cx="316" cy="153" r="2" fill="#fff"/>
+              </g>
+            </g>
+
+            <g id="tun-wrap"><g id="t-tun">
+              <g fill="#E0A988">
+                <rect x="160" y="246" width="34" height="30" rx="15"/><rect x="196" y="252" width="34" height="28" rx="14"/><rect x="232" y="246" width="34" height="30" rx="15"/>
+              </g>
+              <path d="M130 190 C128 132 170 104 214 104 C262 104 296 138 296 190 C296 244 258 270 212 270 C164 270 132 244 130 190 Z" fill="url(#gt)" stroke="#B9794F" stroke-width="3"/>
+              <g fill="none" stroke="#B9794F" stroke-width="3" stroke-linecap="round" opacity=".75">
+                <path d="M160 130 C150 170 156 220 176 252"/><path d="M200 108 C190 160 194 220 204 266"/><path d="M246 112 C240 160 244 220 238 264"/><path d="M280 140 C272 170 276 210 268 240"/>
+              </g>
+              <path d="M178 186 q10 9 20 0 M228 186 q10 9 20 0" stroke="#6B3B26" stroke-width="4" fill="none" stroke-linecap="round"/>
+              <ellipse cx="172" cy="206" rx="13" ry="8" fill="#F4A6A0" opacity=".8"/><ellipse cx="256" cy="206" rx="13" ry="8" fill="#F4A6A0" opacity=".8"/>
+              <circle cx="212" cy="214" r="7" fill="#8B4B33"/>
+              <text class="zz" style="--d:0s" x="292" y="120">z</text><text class="zz" style="--d:.8s" x="300" y="104">z</text><text class="zz" style="--d:1.6s" x="308" y="88">z</text>
+            </g></g>
+
+            <g id="decor">
+              <g id="d-ice">
+                <circle cx="212" cy="190" r="108" fill="rgba(190,230,255,.28)" stroke="rgba(255,255,255,.8)" stroke-width="4"/>
+                <g fill="rgba(210,240,255,.7)" stroke="#fff" stroke-width="2.4" stroke-linejoin="round">
+                  <polygon points="96,150 76,96 118,126"/><polygon points="330,120 356,70 360,128"/><polygon points="318,270 372,262 338,226"/><polygon points="108,262 70,246 100,214"/><polygon points="212,80 196,30 236,64"/>
+                </g>
+                <path d="M150 140 q18 -34 56 -38" stroke="#fff" stroke-width="6" stroke-linecap="round" fill="none" opacity=".75"/>
+              </g>
+              <g id="d-steam">
+                <path class="steam" style="--d:0s" d="M170 96 q-14 -18 0 -34 q14 -16 0 -34"/><path class="steam" style="--d:.5s" d="M214 90 q-14 -18 0 -34 q14 -16 0 -34"/><path class="steam" style="--d:1s" d="M258 96 q-14 -18 0 -34 q14 -16 0 -34"/>
+              </g>
+              <g id="d-bubble">
+                <circle cx="212" cy="190" r="118" fill="rgba(255,255,255,.07)" stroke="rgba(255,255,255,.8)" stroke-width="4"/>
+                <path d="M130 130 q22 -44 70 -52" stroke="#fff" stroke-width="7" stroke-linecap="round" fill="none" opacity=".85"/>
+                <circle cx="318" cy="268" r="6" fill="#fff" opacity=".7"/>
+              </g>
+              <g id="d-crack"><g fill="none" stroke="#4A2A0E" stroke-width="4" stroke-linecap="round" opacity=".7"><path d="M70 300 l40 -10 l22 12 l36 -8"/><path d="M270 302 l34 -12 l20 10 l46 -10"/><path d="M200 306 l14 10 l-6 10"/></g></g>
+            </g>
           </g>
-        </g>
-      </svg>
-      <p class="hint">Tap a layer. Or use the arrow keys.</p>
+        </svg>
+        <p class="say" id="say" aria-live="polite"></p>
+      </div>
+
+      <div class="side">
+        <div class="panel" id="panel" aria-live="polite"></div>
+        <div class="cakecard">
+          <svg viewBox="0 0 240 190" aria-hidden="true" id="cakeSvg"></svg>
+          <p id="count">Layers collected: 0 of 5<small>Each world gives one layer.</small></p>
+        </div>
+      </div>
     </div>
 
-    <div class="panel" id="panel" aria-live="polite"></div>
   </div>
 </section>
 
 <section class="build">
   <div class="wrap">
-    <h2>How I would build the whole archive</h2>
+    <h2 class="serif">How I would build the whole archive</h2>
     <div class="cols">
       <div><h3>One connected library</h3><p>Artworks, science, places and stories live in one searchable CMS and link to each other, so every cake can lead to a field site, a paper or another piece.</p></div>
-      <div><h3>Explore, don't scroll</h3><p>Each artwork becomes an interaction like this one, and selected projects open as ArcGIS Story Maps. Mobile gets its own design, not a shrunk desktop page.</p></div>
+      <div><h3>Every artwork is its own world</h3><p>Each piece gets an interaction like this one, and selected projects open as ArcGIS Story Maps. Mobile gets its own design, not a shrunk desktop page.</p></div>
       <div><h3>Yours to run</h3><p>You add projects and edit text yourself, with no developer needed. Accessible by default: keyboard, screen reader and reduced-motion support. I would build in Framer or a custom stack, whichever serves the site best.</p></div>
     </div>
     <div class="sign">
@@ -148,43 +255,191 @@ footer{padding:26px 0 40px;border-top:1px solid var(--rule);font-size:.88rem;col
     </div>
   </div>
 </section>
-</main>
-
 <footer><div class="wrap">Ritesh Sharma, Raelix &middot; raelix.in &middot; hello@raelix.in. Concept sketch, not affiliated with the Edible Climate Archive.</div></footer>
 
 <script>
 (function(){
-  var L=[
-    {n:"Moss crumb",c:"#8FA24A",f:"Pistachio and matcha sponge",s:"Tardigrades are about half a millimetre long, and they live in moss, lichen and soil on every continent, Antarctica included. Every cake has to start at home."},
-    {n:"The dry tun",c:"#C98A4B",f:"Caramelised dried fig",s:"When water disappears, a tardigrade pulls in its legs, shrivels into a dry ball called a tun and almost stops its metabolism. Add water and it can wake up within hours."},
-    {n:"Deep freeze",c:"#9CC3E6",f:"Blueberry sorbet",s:"In lab experiments, dried tardigrades have been cooled to near absolute zero, and some came back to life when they warmed up."},
-    {n:"Heat",c:"#D4553A",f:"Chilli and dark chocolate",s:"In experiments, dried tardigrades have survived short spells at temperatures above the boiling point of water."},
-    {n:"Open space",c:"#3A2848",f:"Black sesame and charcoal",s:"In 2007, tardigrades flew on a European Space Agency mission and were exposed to the vacuum of space. Some survived and went on to lay eggs."}
+  var RM=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ICON={
+    leaf:'<path d="M5 19c0-8 5-13 14-14 0 9-5 14-13 14z"/><path d="M5 19l8-8"/>',
+    sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/>',
+    snow:'<path d="M12 3v18M4.5 7.5l15 9M19.5 7.5l-15 9"/>',
+    flame:'<path d="M12 3c1 4 5 5 5 10a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-4-1-6 1-9z"/>',
+    star:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>'
+  };
+  var W=[
+    {k:'moss',n:'Moss garden',ic:'leaf',c:'#8FA24A',type:'spores',state:'happy',decor:'',act:'Boop the tardigrade',
+     status:'Home sweet moss. Nothing is wrong here.',
+     sci:'Tardigrades are about half a millimetre long. They live in moss, lichen and soil on every continent, Antarctica included.',
+     fl:'Pistachio and matcha sponge',win:'Boop! Layer collected.'},
+    {k:'desert',n:'Desert drought',ic:'sun',c:'#C98A4B',type:'dust',state:'tun',decor:'crack',act:'Add water',
+     status:'The water is gone. It curls into a dry ball called a tun.',
+     sci:'In a tun, the tardigrade almost stops its metabolism. Add water and it can wake up within hours.',
+     fl:'Caramelised dried fig',win:'Splash! It woke up. Layer collected.'},
+    {k:'ice',n:'Deep freeze',ic:'snow',c:'#9CC3E6',type:'snow',state:'tun',decor:'ice',shiver:true,act:'Warm it up',
+     status:'Brrr. Frozen solid inside a shell of ice.',
+     sci:'In lab experiments, dried tardigrades have been cooled to near absolute zero, and some came back to life when they warmed up.',
+     fl:'Blueberry sorbet',win:'Thawed and fine. Layer collected.'},
+    {k:'heat',n:'Heat wave',ic:'flame',c:'#D4553A',type:'embers',state:'tun',decor:'steam',act:'Cool it down',
+     status:'Hot hot hot. It sits in its tun and waits.',
+     sci:'In experiments, dried tardigrades have survived short spells at temperatures above the boiling point of water.',
+     fl:'Chilli and dark chocolate',win:'Cooled off and fine. Layer collected.'},
+    {k:'space',n:'Open space',ic:'star',c:'#3A2848',type:'stars',state:'tun',decor:'bubble',float:true,act:'Bring it home',
+     status:'Floating in the vacuum, curled up and calm.',
+     sci:'In 2007, tardigrades flew on a European Space Agency mission and were exposed to the vacuum of space. Some survived and went on to lay eggs.',
+     fl:'Black sesame and charcoal',win:'Back on Earth. Layer collected.'}
   ];
-  var panel=document.getElementById('panel'),bands=[].slice.call(document.querySelectorAll('.band')),cur=-1;
-  function empty(){
-    panel.innerHTML='<div class="empty fade"><h2>Five layers, five survival tricks.</h2><p>Pick a layer to slice into it and see what it tastes like and what it teaches.</p><div class="panel-nav"><button class="btn" id="start">Start with the top layer</button></div></div>';
-    document.getElementById('start').onclick=function(){sel(0)};
-  }
-  function sel(i){
-    cur=i;
-    bands.forEach(function(b,k){var on=k===i;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on)});
-    var d=L[i],last=i===L.length-1;
-    panel.innerHTML='<div class="fade"><h2><span class="swatch" style="background:'+d.c+'"></span>'+d.n+'</h2><p class="flavour">'+d.f+'<small>Example flavour, a placeholder for the real recipe</small></p><p class="science">'+d.s+'</p><div class="panel-nav"><button class="btn" id="next">'+(last?'Back to the start':'Next layer')+'</button><button class="btn ghost" id="close">Close</button></div></div>';
-    document.getElementById('next').onclick=function(){last?reset():sel(i+1)};
-    document.getElementById('close').onclick=reset;
-  }
-  function reset(){cur=-1;bands.forEach(function(b){b.classList.remove('on');b.setAttribute('aria-pressed','false')});empty()}
-  bands.forEach(function(b,k){
-    b.addEventListener('click',function(){sel(k)});
-    b.addEventListener('keydown',function(e){
-      if(e.key==='Enter'||e.key===' '){e.preventDefault();sel(k)}
-      else if(e.key==='ArrowDown'||e.key==='ArrowRight'){e.preventDefault();var n=bands[(k+1)%bands.length];n.focus();sel((k+1)%bands.length)}
-      else if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();var p=(k+bands.length-1)%bands.length;bands[p].focus();sel(p)}
-      else if(e.key==='Escape'){reset()}
-    });
+  var lab=document.getElementById('lab'),td=document.getElementById('td'),box=document.getElementById('creatureBox'),
+      panel=document.getElementById('panel'),say=document.getElementById('say'),worldsEl=document.getElementById('worlds'),
+      cakeSvg=document.getElementById('cakeSvg'),count=document.getElementById('count'),bgs=[].slice.call(document.querySelectorAll('.bg'));
+  var cur=0,got=[0,0,0,0,0],phase='ordeal';
+
+  /* world buttons */
+  W.forEach(function(w,i){
+    var b=document.createElement('button');b.className='wbtn';b.type='button';b.setAttribute('aria-pressed',i===0);
+    b.innerHTML='<span class="dot"><svg viewBox="0 0 24 24" aria-hidden="true">'+ICON[w.ic]+'</svg><span class="got" aria-hidden="true">&#10003;</span></span><span>'+w.n+'</span>';
+    b.onclick=function(){setWorld(i)};
+    worldsEl.appendChild(b);
   });
-  empty();
+  var wbtns=[].slice.call(worldsEl.children);
+
+  /* cake */
+  function drawCake(){
+    var s='';
+    for(var i=0;i<5;i++){
+      var w=110+i*26,x=(240-w)/2,y=34+i*30,c=W[i].c;
+      s+=got[i]?'<rect class="tier got" x="'+x+'" y="'+y+'" width="'+w+'" height="28" rx="11" fill="'+c+'" stroke="rgba(255,255,255,.45)" stroke-width="1.5"/><rect x="'+(x+8)+'" y="'+(y+3)+'" width="'+(w-16)+'" height="5" rx="2.5" fill="#fff" opacity=".3"/>'
+              :'<rect x="'+x+'" y="'+y+'" width="'+w+'" height="28" rx="11" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2" stroke-dasharray="6 6"/>';
+    }
+    var n=got.reduce(function(a,b){return a+b},0);
+    if(n===5)s+='<circle cx="120" cy="24" r="9" fill="#E8344E"/><path d="M120 16 q4 -10 12 -10" stroke="#3C7040" stroke-width="3" fill="none" stroke-linecap="round"/>';
+    cakeSvg.innerHTML=s;
+    count.innerHTML='Layers collected: '+n+' of 5<small>'+(n===5?'The whole tardigrade cake!':'Each world gives one layer.')+'</small>';
+    wbtns.forEach(function(b,i){b.classList.toggle('done',!!got[i])});
+  }
+
+  /* panel */
+  function render(extra){
+    var w=W[cur],n=got.reduce(function(a,b){return a+b},0);
+    var html='<div class="fade"><h2 class="serif"><span class="sw" style="background:'+w.c+'"></span>'+w.n+'</h2>';
+    if(phase==='ordeal'){html+='<p class="status">'+w.status+'</p>'}
+    else{html+='<p class="status">'+(extra||w.win)+'</p>'}
+    html+='<p class="science">'+w.sci+'</p><p class="flavour">'+w.fl+'<small>Example flavour, a placeholder for the real recipe</small></p><div class="cta">';
+    if(phase==='ordeal')html+='<button class="btn" id="act">'+w.act+'</button>';
+    else if(n<5)html+='<button class="btn" id="nextw">Next world</button><button class="btn ghost" id="again">Play this one again</button>';
+    else html+='<a class="btn" href="mailto:hello@raelix.in?subject=Edible%20Climate%20Archive">Say hello</a><button class="btn ghost" id="restart">Start over</button>';
+    html+='</div>';
+    if(n===5&&phase==='done')html+='<p class="science" style="margin-top:18px"><b>That was one artwork.</b> The archive would hold hundreds, each its own playable world, all searchable and yours to edit.</p>';
+    html+='</div>';
+    panel.innerHTML=html;
+    var a=document.getElementById('act');if(a)a.onclick=act;
+    var nx=document.getElementById('nextw');if(nx)nx.onclick=function(){var k=got.indexOf(0);setWorld(k<0?(cur+1)%5:k)};
+    var ag=document.getElementById('again');if(ag)ag.onclick=function(){setWorld(cur)};
+    var rs=document.getElementById('restart');if(rs)rs.onclick=function(){got=[0,0,0,0,0];drawCake();setWorld(0)};
+  }
+
+  /* state */
+  function setState(w){
+    td.setAttribute('class','');
+    var cls=[];
+    cls.push(w.state==='happy'?'s-happy':'s-tun');
+    if(w.decor)cls.push('d-'+w.decor);
+    if(w.shiver)cls.push('shiver');
+    if(w.float)cls.push('floaty');
+    td.setAttribute('class',cls.join(' '));
+  }
+  function setWorld(i){
+    cur=i;phase='ordeal';var w=W[i];
+    bgs.forEach(function(b,k){b.classList.toggle('on',k===i)});
+    wbtns.forEach(function(b,k){b.setAttribute('aria-pressed',k===i)});
+    document.querySelector('meta[name=theme-color]').setAttribute('content',['#2F5D3A','#9A5B26','#3A78AE','#9A2A18','#120F36'][i]);
+    setState(w);setType(w.type);say.textContent=i===0?'It says hello.':'';render();
+    if(i===0)setTimeout(function(){say.textContent='Tap it. Go on.'},900);
+  }
+  function act(){
+    var w=W[cur];
+    if(cur===0){boop()}
+    else{
+      td.setAttribute('class','s-happy');
+      lab.classList.remove('wake');void lab.offsetWidth;lab.classList.add('wake');
+      setTimeout(function(){lab.classList.remove('wake')},1000);
+      burst(w.c);
+    }
+    phase='done';say.textContent=cur===0?'Hehe.':'It survived. Obviously.';
+    if(!got[cur]){got[cur]=1;drawCake();
+      if(got.every(function(g){return g})){setTimeout(confetti,500)}
+    }
+    render();
+  }
+  function boop(){
+    lab.classList.remove('boop');void lab.offsetWidth;lab.classList.add('boop');
+    setTimeout(function(){lab.classList.remove('boop')},600);
+    for(var i=0;i<4;i++)heart();
+    if(!RM)burst('#FFB3C0');
+  }
+  function heart(){
+    var h=document.createElement('span');h.className='heart';h.textContent='♥';
+    h.style.left=(30+Math.random()*40)+'%';h.style.top=(10+Math.random()*30)+'%';h.style.animationDelay=(Math.random()*.35)+'s';
+    box.appendChild(h);setTimeout(function(){h.remove()},1900);
+  }
+  td.addEventListener('click',function(e){
+    if(cur===0&&phase==='ordeal'){act()}
+    else if(phase==='done'||cur===0){boop()}
+    else{say.textContent='Shh. It is in its tun. Use the button.'}
+  });
+  td.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();td.dispatchEvent(new Event('click'))}});
+
+  /* eyes follow pointer */
+  var pupils=[].slice.call(td.querySelectorAll('.pupil'));
+  function look(x,y){
+    var r=td.getBoundingClientRect(),cx=r.left+r.width*.82,cy=r.top+r.height*.46;
+    var dx=x-cx,dy=y-cy,d=Math.hypot(dx,dy)||1,m=Math.min(5,d/40);
+    pupils.forEach(function(p){p.style.transform='translate('+(dx/d*m)+'px,'+(dy/d*m)+'px)'});
+  }
+  document.addEventListener('pointermove',function(e){look(e.clientX,e.clientY)});
+  document.addEventListener('pointerdown',function(e){look(e.clientX,e.clientY)});
+
+  /* particles */
+  var cv=document.getElementById('fx'),cx=cv.getContext('2d'),P=[],B=[],type='spores',T=0,Wd=0,Hd=0,run=false,conf=[];
+  function size(){var d=Math.min(window.devicePixelRatio||1,2),r=lab.getBoundingClientRect();Wd=r.width;Hd=r.height;cv.width=Wd*d;cv.height=Hd*d;cx.setTransform(d,0,0,d,0,0)}
+  function rnd(a,b){return a+Math.random()*(b-a)}
+  function setType(t){
+    type=t;P=[];var n={spores:44,dust:70,snow:100,embers:70,stars:130}[t];
+    for(var i=0;i<n;i++)P.push({x:rnd(0,Wd),y:rnd(0,Hd),r:rnd(1.2,4),s:rnd(.4,1.6),p:rnd(0,6.28)});
+    start();
+  }
+  function burst(color){
+    if(RM)return;
+    var r=td.getBoundingClientRect(),l=lab.getBoundingClientRect(),x=r.left-l.left+r.width/2,y=r.top-l.top+r.height*.5;
+    for(var i=0;i<46;i++){var a=rnd(0,6.28),v=rnd(2,7);B.push({x:x,y:y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-3,life:rnd(40,75),r:rnd(2,5),c:i%3?color:'#FFF8EE'})}
+    start();
+  }
+  function confetti(){
+    if(RM)return;var cols=['#8FA24A','#C98A4B','#9CC3E6','#D4553A','#3A2848','#FFF8EE','#FFB3C0'];
+    for(var i=0;i<160;i++)conf.push({x:rnd(0,Wd),y:rnd(-Hd*.4,0),vx:rnd(-1,1),vy:rnd(2,5),w:rnd(6,12),h:rnd(4,8),a:rnd(0,6),va:rnd(-.2,.2),c:cols[i%cols.length]});
+    start();
+  }
+  function frame(){
+    T+=.016;cx.clearRect(0,0,Wd,Hd);
+    P.forEach(function(p){
+      if(type==='spores'){p.y-=p.s*.35;p.x+=Math.sin(T+p.p)*.4;if(p.y<-5){p.y=Hd+5;p.x=rnd(0,Wd)}cx.fillStyle='rgba(225,255,175,'+(.35+.4*Math.sin(T*2+p.p)*Math.sin(T*2+p.p))+')'}
+      else if(type==='dust'){p.x+=p.s*1.6;p.y+=Math.sin(T+p.p)*.35;if(p.x>Wd+5){p.x=-5;p.y=rnd(0,Hd)}cx.fillStyle='rgba(255,226,170,.55)'}
+      else if(type==='snow'){p.y+=p.s*.9;p.x+=Math.sin(T+p.p)*.5;if(p.y>Hd+5){p.y=-5;p.x=rnd(0,Wd)}cx.fillStyle='rgba(255,255,255,.85)'}
+      else if(type==='embers'){p.y-=p.s*1.3;p.x+=Math.sin(T*2+p.p)*.7;if(p.y<-5){p.y=Hd+5;p.x=rnd(0,Wd)}cx.fillStyle='rgba(255,'+(150+Math.floor(p.s*50))+',60,.85)'}
+      else{cx.fillStyle='rgba(255,255,255,'+(.25+.7*Math.abs(Math.sin(T*1.5+p.p)))+')'}
+      cx.beginPath();cx.arc(p.x,p.y,type==='stars'?p.r*.5:p.r,0,6.283);cx.fill();
+    });
+    if(type==='stars'&&Math.sin(T*.7)>.985){cx.strokeStyle='rgba(255,255,255,.9)';cx.lineWidth=2;var sx=(T*400)%Wd;cx.beginPath();cx.moveTo(sx,80);cx.lineTo(sx-70,40);cx.stroke()}
+    B=B.filter(function(b){b.life--;b.x+=b.vx;b.y+=b.vy;b.vy+=.18;b.vx*=.99;cx.globalAlpha=Math.max(0,b.life/60);cx.fillStyle=b.c;cx.beginPath();cx.arc(b.x,b.y,b.r,0,6.283);cx.fill();cx.globalAlpha=1;return b.life>0});
+    conf=conf.filter(function(c){c.x+=c.vx;c.y+=c.vy;c.a+=c.va;cx.save();cx.translate(c.x,c.y);cx.rotate(c.a);cx.fillStyle=c.c;cx.fillRect(-c.w/2,-c.h/2,c.w,c.h);cx.restore();return c.y<Hd+20});
+    if(document.hidden||RM){run=false;return}
+    requestAnimationFrame(frame);
+  }
+  function start(){if(RM||run)return;run=true;requestAnimationFrame(frame)}
+  window.addEventListener('resize',function(){size();});
+  document.addEventListener('visibilitychange',function(){if(!document.hidden)start()});
+
+  size();drawCake();setWorld(0);
 })();
 </script>
 </body>
