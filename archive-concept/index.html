@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Slice the tardigrade: a concept for the Edible Climate Archive</title>
+<meta name="description" content="A small interactive concept sketch: a tardigrade cake you slice layer by layer, each layer a flavour and a piece of science.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#E7F0F7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,500..800,100&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ice:#E7F0F7; --ice-deep:#CFE1EE; --ink:#16304A; --ink-soft:#4A6278;
+  --peach:#EDBB9C; --peach-deep:#D99B78; --moss:#8FA24A; --cream:#FFF8EE;
+  --rule:#BFD3E2;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--ice);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1160px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
+.note{padding:14px 0;font-size:.9rem;color:var(--ink-soft);border-bottom:1px solid var(--rule)}
+.note b{color:var(--ink);font-weight:600}
+
+.hero{padding-top:clamp(36px,6vw,72px);padding-bottom:clamp(40px,6vw,80px)}
+h1{font-family:Fraunces,Georgia,serif;font-weight:700;font-variation-settings:"SOFT" 100,"opsz" 144;font-size:clamp(2.6rem,6.4vw,5rem);line-height:1;letter-spacing:-.02em;max-width:12em}
+.lede{margin-top:18px;font-size:clamp(1.05rem,1.8vw,1.3rem);color:var(--ink-soft);max-width:34em}
+
+.stage{margin-top:clamp(28px,5vw,56px);display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(20px,4vw,56px);align-items:center}
+.cake{position:relative}
+.cake svg{width:100%;height:auto;display:block;overflow:visible}
+.bob{animation:bob 7s ease-in-out infinite;transform-origin:50% 60%}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.band{cursor:pointer;transition:transform .45s cubic-bezier(.3,1.4,.5,1)}
+.band:hover{transform:translateX(10px)}
+.band.on{transform:translateX(34px)}
+.band:focus{outline:none}
+.band:focus-visible .edge{stroke:var(--ink);stroke-width:4}
+.edge{fill:none;stroke:transparent;stroke-width:0}
+.band.on .edge{stroke:var(--ink);stroke-width:3}
+.hint{margin-top:6px;text-align:center;color:var(--ink-soft);font-size:.95rem}
+
+.panel{background:var(--cream);border:1px solid var(--rule);border-radius:28px;padding:clamp(24px,3.4vw,40px);min-height:360px;box-shadow:0 30px 60px -40px rgba(22,48,74,.45)}
+.panel h2{font-family:Fraunces,Georgia,serif;font-weight:700;font-variation-settings:"SOFT" 100;font-size:clamp(1.8rem,3.2vw,2.5rem);line-height:1.1;letter-spacing:-.01em}
+.swatch{display:inline-block;width:14px;height:14px;border-radius:50%;margin-right:10px;vertical-align:baseline}
+.flavour{margin-top:14px;font-weight:600}
+.flavour small{display:block;font-weight:400;color:var(--ink-soft);font-size:.85rem}
+.science{margin-top:16px;font-size:1.05rem}
+.panel-nav{margin-top:26px;display:flex;gap:10px;flex-wrap:wrap}
+button.btn{font:600 1rem Inter,sans-serif;border:0;border-radius:999px;padding:13px 24px;cursor:pointer;background:var(--ink);color:#fff}
+button.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+button.btn:focus-visible,a:focus-visible{outline:3px solid #1D4ED8;outline-offset:3px}
+.empty p{margin-top:12px;font-size:1.1rem;color:var(--ink-soft)}
+.fade{animation:fade .35s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+.build{border-top:1px solid var(--rule);padding:clamp(48px,7vw,88px) 0}
+.build h2{font-family:Fraunces,Georgia,serif;font-weight:700;font-variation-settings:"SOFT" 100;font-size:clamp(1.9rem,3.8vw,3rem);line-height:1.08;letter-spacing:-.015em;max-width:16em}
+.cols{margin-top:34px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,4vw,52px)}
+.cols div{border-top:3px solid var(--ink);padding-top:16px}
+.cols h3{font-size:1.12rem;font-weight:600}
+.cols p{margin-top:8px;color:var(--ink-soft)}
+.sign{margin-top:48px;display:flex;flex-wrap:wrap;gap:18px 32px;align-items:center;justify-content:space-between}
+.sign p{max-width:32em;color:var(--ink-soft);font-size:.95rem}
+.sign a.btn{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;font-weight:600;border-radius:999px;padding:14px 28px}
+footer{padding:26px 0 40px;border-top:1px solid var(--rule);font-size:.88rem;color:var(--ink-soft)}
+
+@media (max-width:860px){
+  .stage{grid-template-columns:1fr}
+  .cols{grid-template-columns:1fr}
+  .panel{min-height:0}
+  .band.on{transform:translateX(22px)}
+}
+@media (prefers-reduced-motion:reduce){
+  .bob{animation:none}
+  .band{transition:none}
+  .fade{animation:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<div class="wrap"><p class="note"><b>A concept sketch</b> made for the Edible Climate Archive call. All art is original and the flavours are placeholders.</p></div>
+
+<main>
+<section class="hero wrap">
+  <h1>Slice the tardigrade.</h1>
+  <p class="lede">Every layer is a flavour. Every flavour is a piece of science. This is how a visitor could explore one artwork in the archive.</p>
+
+  <div class="stage">
+    <div class="cake">
+      <svg viewBox="0 0 680 500" role="group" aria-label="A tardigrade cake made of five layers. Select a layer to read about it.">
+        <defs>
+          <clipPath id="body"><path d="M80 235 C80 125 190 82 312 82 C428 82 520 118 548 196 C566 214 574 238 556 262 C540 300 508 336 462 360 C420 384 360 394 298 394 C180 394 80 360 80 235 Z"/></clipPath>
+        </defs>
+        <g class="bob">
+          <g fill="#8FA24A">
+            <ellipse cx="170" cy="470" rx="64" ry="16"/><ellipse cx="330" cy="474" rx="90" ry="14" fill="#7C9040"/><ellipse cx="500" cy="468" rx="62" ry="16"/>
+            <circle cx="140" cy="458" r="9"/><circle cx="196" cy="454" r="7"/><circle cx="478" cy="452" r="8"/><circle cx="530" cy="456" r="6"/>
+          </g>
+          <g fill="#D99B78">
+            <rect x="196" y="360" width="50" height="96" rx="24"/><rect x="396" y="360" width="50" height="96" rx="24"/>
+          </g>
+          <g fill="#EDBB9C" stroke="#D99B78" stroke-width="3">
+            <rect x="120" y="350" width="56" height="108" rx="27"/><rect x="262" y="360" width="56" height="102" rx="27"/><rect x="340" y="360" width="56" height="102" rx="27"/><rect x="470" y="330" width="52" height="124" rx="26"/>
+          </g>
+          <g stroke="#B9794F" stroke-width="3" stroke-linecap="round" fill="none">
+            <path d="M136 452 l-6 10 M148 456 l0 12 M160 452 l6 10"/>
+            <path d="M278 456 l-6 10 M290 460 l0 12 M302 456 l6 10"/>
+            <path d="M356 456 l-6 10 M368 460 l0 12 M380 456 l6 10"/>
+            <path d="M484 448 l-6 10 M496 452 l0 12 M508 448 l6 10"/>
+          </g>
+
+          <g id="layers">
+            <g class="band" data-i="0" tabindex="0" role="button" aria-pressed="false" aria-label="Layer 1: Moss crumb"><g clip-path="url(#body)"><rect x="0" y="70" width="680" height="64" fill="#8FA24A"/><rect x="0" y="70" width="680" height="9" fill="#B5C77A"/></g><path class="edge" d="M80 134 L560 134"/></g>
+            <g class="band" data-i="1" tabindex="0" role="button" aria-pressed="false" aria-label="Layer 2: The dry tun"><g clip-path="url(#body)"><rect x="0" y="134" width="680" height="62" fill="#C98A4B"/><rect x="0" y="134" width="680" height="8" fill="#E2AE78"/></g></g>
+            <g class="band" data-i="2" tabindex="0" role="button" aria-pressed="false" aria-label="Layer 3: Deep freeze"><g clip-path="url(#body)"><rect x="0" y="196" width="680" height="62" fill="#9CC3E6"/><rect x="0" y="196" width="680" height="8" fill="#C7E0F3"/></g></g>
+            <g class="band" data-i="3" tabindex="0" role="button" aria-pressed="false" aria-label="Layer 4: Heat"><g clip-path="url(#body)"><rect x="0" y="258" width="680" height="62" fill="#D4553A"/><rect x="0" y="258" width="680" height="8" fill="#EE8B6E"/></g></g>
+            <g class="band" data-i="4" tabindex="0" role="button" aria-pressed="false" aria-label="Layer 5: Open space"><g clip-path="url(#body)"><rect x="0" y="320" width="680" height="80" fill="#3A2848"/><rect x="0" y="320" width="680" height="8" fill="#6A4E82"/></g></g>
+          </g>
+
+          <g>
+            <circle cx="548" cy="238" r="26" fill="#FFF8EE" stroke="#D99B78" stroke-width="4"/>
+            <circle cx="548" cy="238" r="12" fill="#8B4B33"/>
+            <ellipse cx="506" cy="182" rx="15" ry="9" fill="#F4A6A0" opacity=".75"/><circle cx="494" cy="150" r="7" fill="#16304A"/><circle cx="494" cy="147" r="2.4" fill="#fff"/>
+          </g>
+        </g>
+      </svg>
+      <p class="hint">Tap a layer. Or use the arrow keys.</p>
+    </div>
+
+    <div class="panel" id="panel" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="build">
+  <div class="wrap">
+    <h2>How I would build the whole archive</h2>
+    <div class="cols">
+      <div><h3>One connected library</h3><p>Artworks, science, places and stories live in one searchable CMS and link to each other, so every cake can lead to a field site, a paper or another piece.</p></div>
+      <div><h3>Explore, don't scroll</h3><p>Each artwork becomes an interaction like this one, and selected projects open as ArcGIS Story Maps. Mobile gets its own design, not a shrunk desktop page.</p></div>
+      <div><h3>Yours to run</h3><p>You add projects and edit text yourself, with no developer needed. Accessible by default: keyboard, screen reader and reduced-motion support. I would build in Framer or a custom stack, whichever serves the site best.</p></div>
+    </div>
+    <div class="sign">
+      <p>Made in an afternoon as a way of saying hello. The real thing would use your artworks, your words and your science.</p>
+      <a class="btn" href="mailto:hello@raelix.in?subject=Edible%20Climate%20Archive">Say hello</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">Ritesh Sharma, Raelix &middot; raelix.in &middot; hello@raelix.in. Concept sketch, not affiliated with the Edible Climate Archive.</div></footer>
+
+<script>
+(function(){
+  var L=[
+    {n:"Moss crumb",c:"#8FA24A",f:"Pistachio and matcha sponge",s:"Tardigrades are about half a millimetre long, and they live in moss, lichen and soil on every continent, Antarctica included. Every cake has to start at home."},
+    {n:"The dry tun",c:"#C98A4B",f:"Caramelised dried fig",s:"When water disappears, a tardigrade pulls in its legs, shrivels into a dry ball called a tun and almost stops its metabolism. Add water and it can wake up within hours."},
+    {n:"Deep freeze",c:"#9CC3E6",f:"Blueberry sorbet",s:"In lab experiments, dried tardigrades have been cooled to near absolute zero, and some came back to life when they warmed up."},
+    {n:"Heat",c:"#D4553A",f:"Chilli and dark chocolate",s:"In experiments, dried tardigrades have survived short spells at temperatures above the boiling point of water."},
+    {n:"Open space",c:"#3A2848",f:"Black sesame and charcoal",s:"In 2007, tardigrades flew on a European Space Agency mission and were exposed to the vacuum of space. Some survived and went on to lay eggs."}
+  ];
+  var panel=document.getElementById('panel'),bands=[].slice.call(document.querySelectorAll('.band')),cur=-1;
+  function empty(){
+    panel.innerHTML='<div class="empty fade"><h2>Five layers, five survival tricks.</h2><p>Pick a layer to slice into it and see what it tastes like and what it teaches.</p><div class="panel-nav"><button class="btn" id="start">Start with the top layer</button></div></div>';
+    document.getElementById('start').onclick=function(){sel(0)};
+  }
+  function sel(i){
+    cur=i;
+    bands.forEach(function(b,k){var on=k===i;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on)});
+    var d=L[i],last=i===L.length-1;
+    panel.innerHTML='<div class="fade"><h2><span class="swatch" style="background:'+d.c+'"></span>'+d.n+'</h2><p class="flavour">'+d.f+'<small>Example flavour, a placeholder for the real recipe</small></p><p class="science">'+d.s+'</p><div class="panel-nav"><button class="btn" id="next">'+(last?'Back to the start':'Next layer')+'</button><button class="btn ghost" id="close">Close</button></div></div>';
+    document.getElementById('next').onclick=function(){last?reset():sel(i+1)};
+    document.getElementById('close').onclick=reset;
+  }
+  function reset(){cur=-1;bands.forEach(function(b){b.classList.remove('on');b.setAttribute('aria-pressed','false')});empty()}
+  bands.forEach(function(b,k){
+    b.addEventListener('click',function(){sel(k)});
+    b.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){e.preventDefault();sel(k)}
+      else if(e.key==='ArrowDown'||e.key==='ArrowRight'){e.preventDefault();var n=bands[(k+1)%bands.length];n.focus();sel((k+1)%bands.length)}
+      else if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();var p=(k+bands.length-1)%bands.length;bands[p].focus();sel(p)}
+      else if(e.key==='Escape'){reset()}
+    });
+  });
+  empty();
+})();
+</script>
+</body>
+</html>
